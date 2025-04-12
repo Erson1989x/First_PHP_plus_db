@@ -58,7 +58,28 @@ try {
     
 } catch(PDOException $e) {
     die("<p style='color: red; font-weight: bold;'>Database error: " . $e->getMessage() . "</p>");
+
+
 }
+
+// Display all users
+$stmt = $pdo->query("SELECT id, username, email, created_at FROM users");
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+echo "<h2>User List</h2>";
+echo "<table border='1'>";
+echo "<tr><th>ID</th><th>Username</th><th>Email</th><th>Created At</th></tr>";
+
+foreach ($users as $user) {
+    echo "<tr>";
+    echo "<td>" . $user['id'] . "</td>";
+    echo "<td>" . $user['username'] . "</td>";
+    echo "<td>" . $user['email'] . "</td>";
+    echo "<td>" . $user['created_at'] . "</td>";
+    echo "</tr>";
+}
+
+echo "</table>";
 ?>
     
 </body>
